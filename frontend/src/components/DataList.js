@@ -6,9 +6,10 @@ import { CSVLink } from "react-csv";
 import DataVisualization from './DataVisualization';
 
 const DataList = () => {
+    // State to hold data, filtered data, sorting/filtering options, error, loading state, and modal state
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [sortBy, setSortBy] = useState('');
+  const [sortBy] = useState('');
   const [filterValue, setFilterValue] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -40,14 +41,14 @@ const DataList = () => {
   };
 
   const applyFilters = () => {
-    let filtered = [...data];
+    let filtered = [...data]; //creating copy of data
 
     if (filterValue.trim() !== '') {
       filtered = filtered.filter(item =>
         Object.values(item).some(val =>
           val.toString().toLowerCase().includes(filterValue.toLowerCase())
         )
-      );
+      ); // filtering based on search input
     }
 
     if (sortBy) {
